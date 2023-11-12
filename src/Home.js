@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BlogList from "./BlogList";
 
 const Home = () => {
   // Initial list of blogs
@@ -13,15 +14,29 @@ const Home = () => {
     },
   ]);
 
+  // Props are used to pass data from parent component into a child component
+  // <ChildComponent variable = {value}></ChildComponent>
+
+  const handleDelete = (id) => {
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
+    setBlogs(newBlogs);
+  };
+
   return (
     <div className="Home">
-      {/* For every blog create a new div with its unique blog ID taken from the JSON */}
-      {blogs.map((blog) => (
-        <div className="blog-preview" key={blog.id}>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-        </div>
-      ))}
+      {/* THIS CONTAINS A TWO PROPS - BLOGS AND TITLE */}
+      <BlogList
+        blogs={blogs}
+        title={"All Blogs!"}
+        handleDelete={handleDelete}
+      ></BlogList>
+
+      {/* DUPLICATING THE ABOVE LINE AND FILTERING THE BLOGS */}
+      {/* <BlogList
+        blogs={blogs.filter((blog) => blog.author === "mario")}
+        title={"Mario's Blogs"}
+        handleDelete={handleDelete}
+      ></BlogList> */}
     </div>
   );
 };
