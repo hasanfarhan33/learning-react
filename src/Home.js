@@ -1,13 +1,15 @@
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
-  // Initial list of blogs
-  const [blogs, setBlogs] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    data: blogs,
+    isPending,
+    error,
+  } = useFetch("http://localhost:8000/blogs");
 
-  // const [name, setName] = useState("Mario");
+  /*// const [name, setName] = useState("Mario");
   // Props are used to pass data from parent component into a child component
   // <ChildComponent variable = {value}></ChildComponent>
 
@@ -17,30 +19,7 @@ const Home = () => {
   // };
 
   // useEffect - will run only when name changes
-  // It can be used to fetch data from the JSON server.
-  useEffect(() => {
-    // Get response from the URL, then convert it into JSON, then get data from JSON
-    // console.log(name);
-    fetch("http://localhost:8000/blogs")
-      .then((res) => {
-        // console.log(res);
-        // Custom error message
-        if (!res.ok) {
-          throw Error("Could not fetch the data!");
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setError(null);
-        setBlogs(data);
-        setIsPending(false);
-      })
-      // Catching network error
-      .catch((err) => {
-        setIsPending(false);
-        setError(err.message);
-      });
-  }, []);
+  // It can be used to fetch data from the JSON server.*/
 
   return (
     <div className="Home">
